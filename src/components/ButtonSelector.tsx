@@ -12,16 +12,21 @@ const Selector: FC<ButtonSelector> = ({
   setSelectedId,
   options,
 }) => {
-  const buttonStyle = "";
   return (
     <div className="flex">
       {options.map((v, i) => (
-        <div className="flex items-center ">
+        <div className="flex items-ceuter">
           <button
             className={
-              i === selectedId
-                ? "bg-orange-500 hover:text-glay text-white  py-2 px-4 "
-                : "bg-white-500 hover:text-glay text-gray  py-2 px-4 "
+              (i === selectedId
+                ? "bg-orange-500 hover:text-glay text-white  py-2 px-4  shadow-inner"
+                : "hover:text-glay text-gray  py-2 px-4 shadow-inner bg-slate-50") +
+              " " +
+              (i === 0
+                ? "rounded-l-2xl"
+                : i === options.length - 1
+                ? "rounded-r-2xl"
+                : "")
             }
             //     checked={i === selectedId}
             onClick={() => setSelectedId(i)}
