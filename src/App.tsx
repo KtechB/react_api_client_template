@@ -5,6 +5,8 @@ import "./App.css";
 import axios from "axios";
 import Selector from "./Selecter";
 import Button from "./components/Button";
+import ButtonSelector from "./components/ButtonSelector";
+import { useApi } from "./useApi";
 
 function App() {
   const postApi = (URL: string) => {
@@ -20,6 +22,8 @@ function App() {
         console.log(error.status); // エラーコードを表示
       });
   };
+  const currency = useApi();
+
   const [selectorId, setSelectorId] = useState(0);
 
   return (
@@ -80,6 +84,11 @@ function App() {
               <Tab.Panel>
                 <div className="container mx-auto ">
                   <h2 className="text-3xl"> Post</h2>
+                  <ButtonSelector
+                    options={["hoge", "huge"]}
+                    selectedId={selectorId}
+                    setSelectedId={setSelectorId}
+                  />
                   <div className="container mx-auto py-2 ">
                     <input className="border-2 rounded-lg" value={"hoge"} />
                   </div>
@@ -98,6 +107,7 @@ function App() {
             </div>
           </Tab.Panels>
         </Tab.Group>
+        <div>{currency?.data.rates.ETH ?? "undefined"}</div>
       </main>
     </div>
   );
